@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+struct Property
+{
+	virtual ~Property() {}
+	virtual float calculateTax() = 0;
+};
+/////////////////////////////// For Appartaments
+struct Appartment : Property
+{
+  int appartmentTax;
+	Appartment(int price) : appartmentTax(price) 
+	{ 
+  
+	}
+  
+  float calculateTax()
+	  return appartmentTax * 0.001;
+};
+/////////////////////////////// for Cars
+struct Car : Property
+{
+	int carTax;
+	Car(int price) : carTax(price) 
+	{
+		
+	}
+	
+  float calculateTax()
+	  return carTax*0.02;
+};
+//////////////////////////////// For Houses
+struct CountryHouse : Property
+{
+	int cHouseTax;
+	CountryHouse(int price) : cHouseTax(price) 
+	{
+	
+	}
+	
+float calculateTax()
+	return cHouseTax*0.05;
+};
+
+int main()
+{
+  system("color F0");
+	Property *allProperty[5];
+	allProperty[0] = new Appartment(15000000);
+	allProperty[1] = new Appartment(12000000);
+	allProperty[2] = new CountryHouse(1000000);
+	allProperty[3] = new Car(900000);
+	allProperty[4] = new Car(1500000);
+	
+	for (int k = 0; k < 5; k++)
+	{
+		cout << "Tax for the " << k+1 << " property = " << fixed << allProperty[k] -> calculateTax() << endl;
+		delete allProperty[k];
+	}
+	cout << endl;
+	system("pause");
+	return 0;
+}
